@@ -231,8 +231,8 @@ GameObject:
   - component: {fileID: 2554720417436106229}
   - component: {fileID: 5619985934887145615}
   - component: {fileID: -5320106637679029849}
-  - component: {fileID: 3045076818832642575}
   - component: {fileID: -1584657613120195910}
+  - component: {fileID: 3946164929306336796}
   m_Layer: 0
   m_Name: cat
   m_TagString: Untagged
@@ -297,19 +297,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &3045076818832642575
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526554761915109350}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.8, z: 0.3}
-  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!114 &-1584657613120195910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +309,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa2a4dc5d81cb94b8b4408ce49fc384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3946164929306336796
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526554761915109350}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1921977085086819228
 GameObject:
   m_ObjectHideFlags: 0
