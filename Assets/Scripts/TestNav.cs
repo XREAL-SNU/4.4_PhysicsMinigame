@@ -17,11 +17,15 @@ public class TestNav : MonoBehaviour
 
     public Camera playerCam;
 
-    [SerializeField] private int targetPoint;
+    public int targetPoint;
     public GameObject turningPoint;
-
+    private void Awake()
+    {
+        targetPoint = Random.Range(1, 15);
+    }
     void Start()
     {
+        
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         int pointCount = points.transform.childCount;
