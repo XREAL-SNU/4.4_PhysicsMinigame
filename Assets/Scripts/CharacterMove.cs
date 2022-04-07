@@ -5,10 +5,6 @@ using UnityEngine;
 public class CharacterMove : MonoBehaviour
 {
     public float speed = 5;
-    void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -24,4 +20,6 @@ public class CharacterMove : MonoBehaviour
             transform.Rotate(0.0f, 1.0f, 0.0f);
 
     }
+
+
 }

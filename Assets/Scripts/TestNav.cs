@@ -10,7 +10,7 @@ public class TestNav : MonoBehaviour
     private List<GameObject> pointList = new List<GameObject>();
     private List<GameObject> movePoints = new List<GameObject>();
     public List<Vector3> turningPointList = new List<Vector3>();
-
+    public Canvas gameOver;
 
     private NavMeshAgent navMeshAgent;
     private NavMeshPath navMeshPath;
@@ -43,26 +43,18 @@ public class TestNav : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    targetPoint++;
 
-        //    navMeshAgent.CalculatePath(pointList[targetPoint].transform.position, navMeshPath);
-
-        //    foreach (Vector3 point in navMeshPath.corners)
-        //    {
-        //        Debug.Log("targetPoint: " + (targetPoint + 1) + "\ncorner: " + point);
-        //    }
-        //    targetPoint = 15;
-        //    navMeshAgent.CalculatePath(pointList[15].transform.position, navMeshPath);
-
-        //    foreach (Vector3 point in navMeshPath.corners)
-        //        Debug.Log("targetPoint: " + (targetPoint + 1) + "\ncorner: " + point);
-        //}
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        int targetNum = GameObject.Find("Player").GetComponent<TestNav>().targetPoint -1;
+        if(other.gameObject.name.Contains(targetNum.ToString())&&other.gameObject.tag == "Point")
+        {
+            Time.timeScale = 0;
+            gameOver.gameObject.SetActive(true);
+        }
+
         DeleteTurningPoints();
 
         var point = other;
@@ -70,7 +62,7 @@ public class TestNav : MonoBehaviour
         Debug.Log("Point " + other.name + " Collision!");
 
         navMeshAgent.CalculatePath(pointList[targetPoint].transform.position, navMeshPath);
-
+        
         foreach (var p in navMeshPath.corners)
         {
             //Debug.Log("targetPoint: " + (targetPoint + 1) + "\ncorner: " + p);

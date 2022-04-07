@@ -8,13 +8,14 @@ public class GameManager : MonoBehaviour
 
     public GameObject cat;
     public List<GameObject> points;
-
+    public Canvas gameOverCanvas;
     public int catCatchScore = 0;
 
 
     private int destinationNum;
     private void Awake()
     {
+        gameOverCanvas.gameObject.SetActive(false);
         if(instance == null)
         {
             instance = this;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
         destinationNum = GameObject.Find("Player").GetComponent<TestNav>().targetPoint;
         foreach(var p in points)
         {
-            if (p.name.Contains(destinationNum.ToString()) == true)
+            if (p.name.Contains((destinationNum-1).ToString()) == true)
                 continue;
 
             Instantiate(cat, p.transform.position,Quaternion.Euler(new Vector3(0, 90 * Random.Range(0, 3), 0)));

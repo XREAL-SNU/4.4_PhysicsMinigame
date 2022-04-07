@@ -41,25 +41,6 @@ public class NavigationSystem : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            targetPoint++;
-
-            navMeshAgent.CalculatePath(pointList[targetPoint].transform.position, navMeshPath);
-
-            foreach (Vector3 point in navMeshPath.corners)
-            {
-                Debug.Log("targetPoint: " + (targetPoint + 1) + "\ncorner: " + point);
-            }
-            targetPoint = 15;
-            navMeshAgent.CalculatePath(pointList[15].transform.position, navMeshPath);
-
-            foreach (Vector3 point in navMeshPath.corners)
-                Debug.Log("targetPoint: " + (targetPoint + 1) + "\ncorner: " + point);
-        }
-        */
-
 
     }
 

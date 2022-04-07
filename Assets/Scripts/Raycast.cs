@@ -14,8 +14,8 @@ public class Raycast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * 3, Color.red);
-        if(Physics.Raycast(transform.position, transform.forward * 3, out raych))
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
+        if(Physics.Raycast(transform.position, transform.forward, out raych,1))
         {
             if(raych.transform.name.Contains("cat"))
             {
