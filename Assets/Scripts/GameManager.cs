@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject cat;
     public List<GameObject> points;
 
+    public int catCatchScore = 0;
+
+
     private int destinationNum;
     private void Awake()
     {

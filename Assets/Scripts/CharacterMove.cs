@@ -18,10 +18,10 @@ public class CharacterMove : MonoBehaviour
         transform.Translate(Vector3.forward * speed * ver * Time.deltaTime);      //이동
                                                                                   //transform.Rotate(Vector3.up * speed/5 * hor);
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            transform.Rotate(0.0f, -90.0f, 0.0f);
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-            transform.Rotate(0.0f, 90.0f, 0.0f);
+        if (Input.GetKey(KeyCode.LeftArrow))
+            transform.Rotate(0.0f, -1.0f, 0.0f);
+        else if (Input.GetKey(KeyCode.RightArrow))
+            transform.Rotate(0.0f, 1.0f, 0.0f);
 
     }
 }
