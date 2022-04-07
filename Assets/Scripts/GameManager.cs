@@ -36,16 +36,6 @@ public class GameManager : MonoBehaviour
                 continue;
 
             Instantiate(cat, p.transform.position,Quaternion.Euler(new Vector3(0, 90 * Random.Range(0, 3), 0)));
-
-
         }
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -877,6 +877,7 @@ MonoBehaviour:
   points: {fileID: 1416357618}
   turningPointList: []
   gameOver: {fileID: 1274008947}
+  scoretxt: {fileID: 240137737}
   playerCam: {fileID: 1962484109}
   targetPoint: 0
   turningPoint: {fileID: 2264274065797923457, guid: b40c4d1abe566d241b26d72e495ad8a8, type: 3}

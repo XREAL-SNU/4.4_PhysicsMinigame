@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+
 
 public class TestNav : MonoBehaviour
 {
@@ -11,11 +13,12 @@ public class TestNav : MonoBehaviour
     private List<GameObject> movePoints = new List<GameObject>();
     public List<Vector3> turningPointList = new List<Vector3>();
     public Canvas gameOver;
-
+    public Text scoretxt;
     private NavMeshAgent navMeshAgent;
     private NavMeshPath navMeshPath;
 
     public Camera playerCam;
+   
 
     public int targetPoint;
     public GameObject turningPoint;
@@ -24,8 +27,7 @@ public class TestNav : MonoBehaviour
         targetPoint = Random.Range(1, 15);
     }
     void Start()
-    {
-        
+    {        
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         int pointCount = points.transform.childCount;
@@ -41,17 +43,13 @@ public class TestNav : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-    }
-
     public void OnTriggerEnter(Collider other)
     {
-        int targetNum = GameObject.Find("Player").GetComponent<TestNav>().targetPoint -1;
+        int targetNum = GameObject.Find("Player").GetComponent<TestNav>().targetPoint+1;
         if(other.gameObject.name.Contains(targetNum.ToString())&&other.gameObject.tag == "Point")
         {
             Time.timeScale = 0;
+            scoretxt.text = "Score : " + GameManager.instance.catCatchScore.ToString();
             gameOver.gameObject.SetActive(true);
         }
 
@@ -59,13 +57,12 @@ public class TestNav : MonoBehaviour
 
         var point = other;
 
-        Debug.Log("Point " + other.name + " Collision!");
+        Debug.Log("Point " + other.name + " Collision! \n" + targetNum.ToString());
 
         navMeshAgent.CalculatePath(pointList[targetPoint].transform.position, navMeshPath);
         
         foreach (var p in navMeshPath.corners)
         {
-            //Debug.Log("targetPoint: " + (targetPoint + 1) + "\ncorner: " + p);
             turningPointList.Add(p);            
         }
         MakeTurningPoints();
