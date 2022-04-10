@@ -150,7 +150,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19505462}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -339,7 +339,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775554055}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -599,7 +599,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714101958}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -695,7 +695,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018573507}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
@@ -899,23 +899,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1912440556627710979, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
       propertyPath: m_Name
-      value: 11720_Curling_Stone
+      value: Stone
       objectReference: {fileID: 0}
     - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.010081056
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.010081057
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.010081057
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 17.303
       objectReference: {fileID: 0}
     - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.98933
+      value: 1.2023
       objectReference: {fileID: 0}
     - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.000000021841
       objectReference: {fileID: 0}
     - target: {fileID: 7624328148902869435, guid: 349a42194001bae489a6ad99b68d2f90, type: 3}
       propertyPath: m_LocalRotation.w
