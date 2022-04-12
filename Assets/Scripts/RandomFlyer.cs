@@ -5,7 +5,7 @@ using UnityEngine;
 // [RequireComponent(typeof(Animator))] // Requires animator with parameter "flySpeed" catering for 0, 1 (idle, flap)
 [RequireComponent(typeof(Rigidbody))] // Requires Rigidbody to move around
 
-public class RandomFlyer : MonoBehaviour
+public class RandomFlyer : MonoBehaviour, Observer
 {
     [SerializeField] float idleSpeed, turnSpeed, switchSeconds, idleRatio;
     [SerializeField] Vector2 animSpeedMinMax, moveSpeedMinMax, changeAnimEveryFromTo, changeTargetEveryFromTo;
@@ -24,7 +24,30 @@ public class RandomFlyer : MonoBehaviour
     private Quaternion lookRotation;
     [System.NonSerialized] public float distanceFromBase, distanceFromTarget;
 
+    // testing
+    public string fly_status;
+    public GameObject wall1;
+    public GameObject wall2;
+    public GameObject wall3;
+    public GameObject wall4;
 
+    Transform wall1_t;
+    Transform wall2_t;
+    Transform wall3_t;
+    Transform wall4_t;
+
+    protected string gameState;
+
+    public void GameStateUpdate(GameManager.GameState gameState)
+    {
+        this.gameState = gameState.ToString();
+        Debug.Log($"{this.name} recognizes {gameState}");
+    }
+
+    private void Awake()
+    {
+        GameManager.Instance().AddMosquito(this.GetComponent<RandomFlyer>());
+    }
     void Start()
     {
         // Inititalize
@@ -33,92 +56,114 @@ public class RandomFlyer : MonoBehaviour
         turnSpeedBackup = turnSpeed;
         direction = Quaternion.Euler(transform.eulerAngles) * (Vector3.forward);
         if (delayStart < 0f) body.velocity = idleSpeed * direction;
+        fly_status = "stop";
+
+        wall1_t = wall1.transform;
+        wall2_t = wall2.transform;
+        wall3_t = wall3.transform;
+        wall4_t = wall4.transform;
+
     }
 
     void FixedUpdate()
     {
-        // Wait if start should be delayed (useful to add small differences in large flocks)
-        if (delayStart > 0f)
+        if (fly_status != "stop")
         {
-            delayStart -= Time.fixedDeltaTime;
-            return;
-        }
-        // Calculate distances
-        distanceFromBase = Vector3.Magnitude(randomizedBase - body.position);
-        distanceFromTarget = Vector3.Magnitude(flyingTarget.position - body.position);
-        // Allow drastic turns close to base to ensure target can be reached
-        if (returnToBase && distanceFromBase < 10f)
-        {
-            if (turnSpeed != 300f && body.velocity.magnitude != 0f)
+
+            // Wait if start should be delayed (useful to add small differences in large flocks)
+            if (delayStart > 0f)
             {
-                turnSpeedBackup = turnSpeed;
-                turnSpeed = 300f;
-            }
-            else if (distanceFromBase <= 2f)
-            {
-                body.velocity = Vector3.zero;
-                turnSpeed = turnSpeedBackup;
+                delayStart -= Time.fixedDeltaTime;
                 return;
             }
-        }
-        // Time for a new animation speed
-        if (changeAnim < 0f)
-        {
-            prevAnim = currentAnim;
-            currentAnim = ChangeAnim(currentAnim);
-            changeAnim = Random.Range(changeAnimEveryFromTo.x, changeAnimEveryFromTo.y);
-            timeSinceAnim = 0f;
-            prevSpeed = speed;
-            if (currentAnim == 0) speed = idleSpeed;
-            else speed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, (currentAnim - animSpeedMinMax.x) / (animSpeedMinMax.y - animSpeedMinMax.x));
-        }
-        // Time for a new target position
-        if (changeTarget < 0f)
-        {
-            rotateTarget = ChangeDirection(body.transform.position);
-            if (returnToBase) changeTarget = 0.2f; else changeTarget = Random.Range(changeTargetEveryFromTo.x, changeTargetEveryFromTo.y);
-            timeSinceTarget = 0f;
-        }
-        // Turn when approaching height limits
-        // ToDo: Adjust limit and "exit direction" by object's direction and velocity, instead of the 10f and 1f - this works in my current scenario/scale
-        if (body.transform.position.y < yMinMax.x + 10f ||
-            body.transform.position.y > yMinMax.y - 10f)
-        {
-            if (body.transform.position.y < yMinMax.x + 10f) rotateTarget.y = 1f; else rotateTarget.y = -1f;
-        }
-        //body.transform.Rotate(0f, 0f, -prevz, Space.Self); // If required to make Quaternion.LookRotation work correctly, but it seems to be fine
-        zturn = Mathf.Clamp(Vector3.SignedAngle(rotateTarget, direction, Vector3.up), -45f, 45f);
-        // Update times
-        changeAnim -= Time.fixedDeltaTime;
-        changeTarget -= Time.fixedDeltaTime;
-        timeSinceTarget += Time.fixedDeltaTime;
-        timeSinceAnim += Time.fixedDeltaTime;
+            // Calculate distances
+            distanceFromBase = Vector3.Magnitude(randomizedBase - body.position);
+            distanceFromTarget = Vector3.Magnitude(flyingTarget.position - body.position);
+            // Allow drastic turns close to base to ensure target can be reached
+            if (returnToBase && distanceFromBase < 10f)
+            {
+                if (turnSpeed != 300f && body.velocity.magnitude != 0f)
+                {
+                    turnSpeedBackup = turnSpeed;
+                    turnSpeed = 300f;
+                }
+                else if (distanceFromBase <= 2f)
+                {
+                    body.velocity = Vector3.zero;
+                    turnSpeed = turnSpeedBackup;
+                    return;
+                }
+            }
+            // Time for a new animation speed
+            if (changeAnim < 0f)
+            {
+                prevAnim = currentAnim;
+                currentAnim = ChangeAnim(currentAnim);
+                changeAnim = Random.Range(changeAnimEveryFromTo.x, changeAnimEveryFromTo.y);
+                timeSinceAnim = 0f;
+                prevSpeed = speed;
+                if (currentAnim == 0) speed = idleSpeed;
+                else speed = Mathf.Lerp(moveSpeedMinMax.x, moveSpeedMinMax.y, (currentAnim - animSpeedMinMax.x) / (animSpeedMinMax.y - animSpeedMinMax.x));
+            }
+            // Time for a new target position
+            if (changeTarget < 0f)
+            {
+                rotateTarget = ChangeDirection(body.transform.position);
+                if (returnToBase) changeTarget = 0.2f; else changeTarget = Random.Range(changeTargetEveryFromTo.x, changeTargetEveryFromTo.y);
+                timeSinceTarget = 0f;
+            }
+            // Turn when approaching height limits
+            // ToDo: Adjust limit and "exit direction" by object's direction and velocity, instead of the 10f and 1f - this works in my current scenario/scale
+            if (body.transform.position.y < yMinMax.x + 10f ||
+                body.transform.position.y > yMinMax.y - 10f)
+            {
+                if (body.transform.position.y < yMinMax.x + 10f) rotateTarget.y = 1f; else rotateTarget.y = -1f;
+            }
+            //body.transform.Rotate(0f, 0f, -prevz, Space.Self); // If required to make Quaternion.LookRotation work correctly, but it seems to be fine
+            zturn = Mathf.Clamp(Vector3.SignedAngle(rotateTarget, direction, Vector3.up), -45f, 45f);
+            // Update times
+            changeAnim -= Time.fixedDeltaTime;
+            changeTarget -= Time.fixedDeltaTime;
+            timeSinceTarget += Time.fixedDeltaTime;
+            timeSinceAnim += Time.fixedDeltaTime;
 
-        // Rotate towards target
-        if (rotateTarget != Vector3.zero) lookRotation = Quaternion.LookRotation(rotateTarget, Vector3.up);
-        Vector3 rotation = Quaternion.RotateTowards(body.transform.rotation, lookRotation, turnSpeed * Time.fixedDeltaTime).eulerAngles;
-        body.transform.eulerAngles = rotation;
-        // Rotate on z-axis to tilt body towards turn direction
-        float temp = prevz;
-        if (prevz < zturn) prevz += Mathf.Min(turnSpeed * Time.fixedDeltaTime, zturn - prevz);
-        else if (prevz >= zturn) prevz -= Mathf.Min(turnSpeed * Time.fixedDeltaTime, prevz - zturn);
-        // Min and max rotation on z-axis - can also be parameterized
-        prevz = Mathf.Clamp(prevz, -45f, 45f);
-        // Remove temp if transform is rotated back earlier in FixedUpdate
-        body.transform.Rotate(0f, 0f, prevz - temp, Space.Self);
-        // Move flyer
-        direction = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
-        if (returnToBase && distanceFromBase < idleSpeed)
-        {
-            body.velocity = Mathf.Min(idleSpeed, distanceFromBase) * direction;
+            // Rotate towards target
+            if (rotateTarget != Vector3.zero) lookRotation = Quaternion.LookRotation(rotateTarget, Vector3.up);
+            Vector3 rotation = Quaternion.RotateTowards(body.transform.rotation, lookRotation, turnSpeed * Time.fixedDeltaTime).eulerAngles;
+            body.transform.eulerAngles = rotation;
+            // Rotate on z-axis to tilt body towards turn direction
+            float temp = prevz;
+            if (prevz < zturn) prevz += Mathf.Min(turnSpeed * Time.fixedDeltaTime, zturn - prevz);
+            else if (prevz >= zturn) prevz -= Mathf.Min(turnSpeed * Time.fixedDeltaTime, prevz - zturn);
+            // Min and max rotation on z-axis - can also be parameterized
+            prevz = Mathf.Clamp(prevz, -45f, 45f);
+            // Remove temp if transform is rotated back earlier in FixedUpdate
+            body.transform.Rotate(0f, 0f, prevz - temp, Space.Self);
+            // Move flyer
+            direction = Quaternion.Euler(transform.eulerAngles) * Vector3.forward;
+            if (returnToBase && distanceFromBase < idleSpeed)
+            {
+                body.velocity = Mathf.Min(idleSpeed, distanceFromBase) * direction;
+            }
+            else body.velocity = Mathf.Lerp(prevSpeed, speed, Mathf.Clamp(timeSinceAnim / switchSeconds, 0f, 1f)) * direction;
+            // Hard-limit the height, in case the limit is breached despite of the turnaround attempt
+            if (body.transform.position.y < yMinMax.x || body.transform.position.y > yMinMax.y)
+            {
+                position = body.transform.position;
+                position.y = Mathf.Clamp(position.y, yMinMax.x, yMinMax.y);
+                body.transform.position = position;
+            }
         }
-        else body.velocity = Mathf.Lerp(prevSpeed, speed, Mathf.Clamp(timeSinceAnim / switchSeconds, 0f, 1f)) * direction;
-        // Hard-limit the height, in case the limit is breached despite of the turnaround attempt
-        if (body.transform.position.y < yMinMax.x || body.transform.position.y > yMinMax.y)
+        else
         {
-            position = body.transform.position;
-            position.y = Mathf.Clamp(position.y, yMinMax.x, yMinMax.y);
-            body.transform.position = position;
+            RaycastHit hit;
+            int layerMask = 1 << LayerMask.NameToLayer("Wall");
+            if (Physics.Raycast(transform.position, (transform.position - wall1_t.position), out hit, 10F, layerMask))
+            {
+                transform.position = hit.point;
+                Debug.Log(this.name + ": " + hit.transform.gameObject.name);
+            }
+
         }
     }
 
@@ -168,4 +213,5 @@ public class RandomFlyer : MonoBehaviour
         }
         return newDir.normalized;
     }
+
 }
