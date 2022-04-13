@@ -47,6 +47,7 @@ public class PlayerBall : MonoBehaviour
         if (other.tag == "Item")
         {
             itemCount++;
+            Debug.Log(itemCount.ToString() + "/7");
             other.gameObject.SetActive(false);
         }
         else if (other.tag == "Finish")
