@@ -235,6 +235,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1523054713}
     - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+      propertyPath: flyingSound
+      value: 
+      objectReference: {fileID: 799514501}
+    - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
       propertyPath: flyingTarget
       value: 
       objectReference: {fileID: 299196615}
@@ -904,6 +908,14 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!81 &444986157
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444986148}
+  m_Enabled: 1
 --- !u!1 &502613187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,6 +1106,10 @@ PrefabInstance:
       propertyPath: homeTarget
       value: 
       objectReference: {fileID: 1523054713}
+    - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+      propertyPath: flyingSound
+      value: 
+      objectReference: {fileID: 2093651946}
     - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
       propertyPath: flyingTarget
       value: 
@@ -1404,6 +1420,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2195447432564651463, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
   m_PrefabInstance: {fileID: 1392510727}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &571960141 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3926720691630765572, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+  m_PrefabInstance: {fileID: 1392510727}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &586090438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1605,10 @@ PrefabInstance:
       propertyPath: homeTarget
       value: 
       objectReference: {fileID: 1523054713}
+    - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+      propertyPath: flyingSound
+      value: 
+      objectReference: {fileID: 1041092389}
     - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
       propertyPath: flyingTarget
       value: 
@@ -2109,6 +2134,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2195447432564651463, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
   m_PrefabInstance: {fileID: 35362927}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &799514501 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3926720691630765572, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+  m_PrefabInstance: {fileID: 35362927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &836048713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2188,6 +2218,11 @@ CanvasRenderer:
 --- !u!4 &1041092388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2195447432564651463, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+  m_PrefabInstance: {fileID: 643116690}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1041092389 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3926720691630765572, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
   m_PrefabInstance: {fileID: 643116690}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1044316925 stripped
@@ -2750,6 +2785,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2195447432564651463, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
   m_PrefabInstance: {fileID: 5778846729948151650}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1353280607 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3926720691630765572, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+  m_PrefabInstance: {fileID: 5778846729948151650}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1392510727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2861,6 +2901,10 @@ PrefabInstance:
       propertyPath: homeTarget
       value: 
       objectReference: {fileID: 1523054713}
+    - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+      propertyPath: flyingSound
+      value: 
+      objectReference: {fileID: 571960141}
     - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
       propertyPath: flyingTarget
       value: 
@@ -3948,6 +3992,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2195447432564651463, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
   m_PrefabInstance: {fileID: 529943292}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &2093651946 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3926720691630765572, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+  m_PrefabInstance: {fileID: 529943292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5778846729948151650
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4075,6 +4124,10 @@ PrefabInstance:
       propertyPath: homeTarget
       value: 
       objectReference: {fileID: 157207070}
+    - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
+      propertyPath: flyingSound
+      value: 
+      objectReference: {fileID: 1353280607}
     - target: {fileID: 7546868691316507550, guid: 73473e85acd694e47b5652cf6682a9d9, type: 3}
       propertyPath: flyingTarget
       value: 

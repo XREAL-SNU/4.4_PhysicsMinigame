@@ -42,6 +42,8 @@ public class RandomFlyer : MonoBehaviour, MosquitoObserver
     protected int gameRound;
     protected bool IsEnd = false;
 
+    public AudioSource flyingSound;
+
     public void GameStateUpdate(GameManager.GameState gameState)
     {
         this.gameState = gameState.ToString();
@@ -84,6 +86,8 @@ public class RandomFlyer : MonoBehaviour, MosquitoObserver
     {
         if (gameState == "Track" && !IsEnd)
         {
+            if (!flyingSound.isPlaying)
+                flyingSound.Play();
             IsStop = false;
             // Wait if start should be delayed (useful to add small differences in large flocks)
             if (delayStart > 0f)
@@ -172,6 +176,7 @@ public class RandomFlyer : MonoBehaviour, MosquitoObserver
         // gamestate is Catch
         else if (gameState == "Catch" && !IsEnd)
         {
+            flyingSound.Pause();
             body.velocity = Vector3.zero;
             body.angularVelocity = Vector3.zero;
             // Find closest wall from current position

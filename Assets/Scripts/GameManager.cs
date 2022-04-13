@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour, Subject
 
     void Start()
     {
-        InvokeRepeating("ChangeState", 0, 6);
+        InvokeRepeating("ChangeState", 0, 8);
         _mosquitoCount = 5;
         _round = 0;
     }
