@@ -199,6 +199,7 @@ public class RandomFlyer : MonoBehaviour, MosquitoObserver
             }
 
         }
+        else flyingSound.Stop();
 
     }
 
