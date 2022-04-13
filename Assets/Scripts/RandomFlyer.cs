@@ -6,7 +6,7 @@ using System.Linq;
 // [RequireComponent(typeof(Animator))] // Requires animator with parameter "flySpeed" catering for 0, 1 (idle, flap)
 [RequireComponent(typeof(Rigidbody))] // Requires Rigidbody to move around
 
-public class RandomFlyer : MonoBehaviour, Observer
+public class RandomFlyer : MonoBehaviour, MosquitoObserver
 {
     [SerializeField] float idleSpeed, turnSpeed, switchSeconds, idleRatio;
     [SerializeField] Vector2 animSpeedMinMax, moveSpeedMinMax, changeAnimEveryFromTo, changeTargetEveryFromTo;
@@ -39,6 +39,8 @@ public class RandomFlyer : MonoBehaviour, Observer
 
     protected string gameState;
     private bool IsStop = false;
+    protected int gameRound;
+    protected bool IsEnd = false;
 
     public void GameStateUpdate(GameManager.GameState gameState)
     {
@@ -46,10 +48,15 @@ public class RandomFlyer : MonoBehaviour, Observer
 
     }
 
-    private void Awake()
+    public void RoundUpdate(int gameRound)
     {
-
+        this.gameRound = gameRound;
     }
+    public void IsEndUpdate()
+    {
+        this.IsEnd = true;
+    }
+
     void Start()
     {
         // Inititalize
@@ -75,7 +82,7 @@ public class RandomFlyer : MonoBehaviour, Observer
 
     void FixedUpdate()
     {
-        if (gameState == "Track")
+        if (gameState == "Track" && !IsEnd)
         {
             IsStop = false;
             // Wait if start should be delayed (useful to add small differences in large flocks)
@@ -163,7 +170,7 @@ public class RandomFlyer : MonoBehaviour, Observer
             }
         }
         // gamestate is Catch
-        else if (gameState == "Catch")
+        else if (gameState == "Catch" && !IsEnd)
         {
             body.velocity = Vector3.zero;
             body.angularVelocity = Vector3.zero;
@@ -199,11 +206,6 @@ public class RandomFlyer : MonoBehaviour, Observer
         {
             newState = Random.Range(animSpeedMinMax.x, animSpeedMinMax.y);
         }
-        //if (newState != currentAnim)
-        //{
-        //    animator.SetFloat("flySpeed", newState);
-        //    if (newState == 0) animator.speed = 1f; else animator.speed = newState;
-        //}
         return newState;
     }
 

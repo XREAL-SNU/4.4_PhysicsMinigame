@@ -6,11 +6,35 @@ public class Player : MonoBehaviour, Observer
 {
 
     protected string gameState;
-
+    protected int gameRound;
+    protected int mosquitoCount = 5;
     public void GameStateUpdate(GameManager.GameState gameState)
     {
         this.gameState = gameState.ToString();
         Debug.Log($"{this.name} recognizes {gameState}");
+    }
+
+    public void RoundUpdate(int gameround)
+    {
+        this.gameRound = gameround;
+    }
+
+    public bool IsDead()
+    {
+        if (gameRound > 3)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsWin()
+    {
+        if (mosquitoCount == 0)
+        {
+            return true;
+        }
+        return false;
     }
 
 
@@ -37,7 +61,20 @@ public class Player : MonoBehaviour, Observer
             {
                 Debug.Log($"{hit.transform.gameObject.name} got hit");
                 Destroy(hit.transform.gameObject);
+                mosquitoCount--;
 
+            }
+        }
+        else
+        {
+            if (IsDead())
+            {
+                GameManager.Instance().GameEndNotify(false);
+
+            }
+            if (IsWin())
+            {
+                GameManager.Instance().GameEndNotify(true);
             }
         }
     }
