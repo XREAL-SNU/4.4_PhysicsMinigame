@@ -43,7 +43,7 @@ public class RandomFlyer : MonoBehaviour, Observer
     public void GameStateUpdate(GameManager.GameState gameState)
     {
         this.gameState = gameState.ToString();
-        Debug.Log($"{this.name} recognizes {gameState}");
+
     }
 
     private void Awake()
@@ -165,24 +165,25 @@ public class RandomFlyer : MonoBehaviour, Observer
         // gamestate is Catch
         else if (gameState == "Catch")
         {
+            body.velocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
             // Find closest wall from current position
             distmap[wall1_t] = Vector3.Distance(body.transform.position, wall1_t.position);
             distmap[wall2_t] = Vector3.Distance(body.transform.position, wall2_t.position);
             distmap[wall3_t] = Vector3.Distance(body.transform.position, wall3_t.position);
             distmap[wall4_t] = Vector3.Distance(body.transform.position, wall4_t.position);
 
-            var closestWall = distmap.OrderBy(kvp => kvp.Value).First().Key;
+            var closestWall = distmap.OrderBy(kvp => kvp.Value).Last().Key;
 
             //ray cast to closestwall and attack to the wall
             RaycastHit hit;
             int layerMask = 1 << LayerMask.NameToLayer("Wall");
 
-            if (Physics.Raycast(transform.position, (body.transform.position - closestWall.position), out hit, 100F, layerMask) && !IsStop)
+            if (Physics.Raycast(transform.position, (body.transform.position - closestWall.position).normalized, out hit, 100f, layerMask) && !IsStop)
             {
                 body.transform.position = hit.point;
-                body.velocity = Vector3.zero;
-                body.angularVelocity = Vector3.zero;
                 IsStop = true;
+                Debug.Log($"{name} stop!");
             }
 
         }

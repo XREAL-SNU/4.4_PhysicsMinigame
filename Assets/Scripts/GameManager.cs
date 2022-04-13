@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour, Subject
         Track,
         Catch
     }
-    private GameState gameState = GameState.Track;
+    private GameState gameState = GameState.Catch;
     private delegate void GameStateHandler(GameState gameState);
     private GameStateHandler _gameStateHandler;
 
@@ -57,5 +57,9 @@ public class GameManager : MonoBehaviour, Subject
     public void AddMosquito(RandomFlyer randomFlyer)
     {
         _gameStateHandler += new GameStateHandler(randomFlyer.GameStateUpdate);
+    }
+    public void AddPlayer(Player player)
+    {
+        _gameStateHandler += new GameStateHandler(player.GameStateUpdate);
     }
 }
