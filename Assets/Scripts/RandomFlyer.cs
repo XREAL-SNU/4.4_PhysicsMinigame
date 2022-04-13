@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 // [RequireComponent(typeof(Animator))] // Requires animator with parameter "flySpeed" catering for 0, 1 (idle, flap)
 [RequireComponent(typeof(Rigidbody))] // Requires Rigidbody to move around
@@ -24,8 +25,7 @@ public class RandomFlyer : MonoBehaviour, Observer
     private Quaternion lookRotation;
     [System.NonSerialized] public float distanceFromBase, distanceFromTarget;
 
-    // testing
-    public string fly_status;
+
     public GameObject wall1;
     public GameObject wall2;
     public GameObject wall3;
@@ -35,8 +35,10 @@ public class RandomFlyer : MonoBehaviour, Observer
     Transform wall2_t;
     Transform wall3_t;
     Transform wall4_t;
+    Dictionary<Transform, float> distmap = new Dictionary<Transform, float>();
 
     protected string gameState;
+    private bool IsStop = false;
 
     public void GameStateUpdate(GameManager.GameState gameState)
     {
@@ -46,30 +48,36 @@ public class RandomFlyer : MonoBehaviour, Observer
 
     private void Awake()
     {
-        GameManager.Instance().AddMosquito(this.GetComponent<RandomFlyer>());
+
     }
     void Start()
     {
         // Inititalize
+        GameManager.Instance().AddMosquito(this.GetComponent<RandomFlyer>());
+
         // animator = GetComponent<Animator>();
         body = GetComponent<Rigidbody>();
         turnSpeedBackup = turnSpeed;
         direction = Quaternion.Euler(transform.eulerAngles) * (Vector3.forward);
         if (delayStart < 0f) body.velocity = idleSpeed * direction;
-        fly_status = "stop";
 
         wall1_t = wall1.transform;
         wall2_t = wall2.transform;
         wall3_t = wall3.transform;
         wall4_t = wall4.transform;
 
+        distmap.Add(wall1_t, 0F);
+        distmap.Add(wall2_t, 0F);
+        distmap.Add(wall3_t, 0F);
+        distmap.Add(wall4_t, 0F);
+
     }
 
     void FixedUpdate()
     {
-        if (fly_status != "stop")
+        if (gameState == "Track")
         {
-
+            IsStop = false;
             // Wait if start should be delayed (useful to add small differences in large flocks)
             if (delayStart > 0f)
             {
@@ -154,17 +162,31 @@ public class RandomFlyer : MonoBehaviour, Observer
                 body.transform.position = position;
             }
         }
-        else
+        // gamestate is Catch
+        else if (gameState == "Catch")
         {
+            // Find closest wall from current position
+            distmap[wall1_t] = Vector3.Distance(body.transform.position, wall1_t.position);
+            distmap[wall2_t] = Vector3.Distance(body.transform.position, wall2_t.position);
+            distmap[wall3_t] = Vector3.Distance(body.transform.position, wall3_t.position);
+            distmap[wall4_t] = Vector3.Distance(body.transform.position, wall4_t.position);
+
+            var closestWall = distmap.OrderBy(kvp => kvp.Value).First().Key;
+
+            //ray cast to closestwall and attack to the wall
             RaycastHit hit;
             int layerMask = 1 << LayerMask.NameToLayer("Wall");
-            if (Physics.Raycast(transform.position, (transform.position - wall1_t.position), out hit, 10F, layerMask))
+
+            if (Physics.Raycast(transform.position, (body.transform.position - closestWall.position), out hit, 100F, layerMask) && !IsStop)
             {
-                transform.position = hit.point;
-                Debug.Log(this.name + ": " + hit.transform.gameObject.name);
+                body.transform.position = hit.point;
+                body.velocity = Vector3.zero;
+                body.angularVelocity = Vector3.zero;
+                IsStop = true;
             }
 
         }
+
     }
 
     // Select a new animation speed randomly

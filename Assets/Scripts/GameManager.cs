@@ -33,18 +33,18 @@ public class GameManager : MonoBehaviour, Subject
         Track,
         Catch
     }
-    private GameState gameState;
+    private GameState gameState = GameState.Track;
     private delegate void GameStateHandler(GameState gameState);
     private GameStateHandler _gameStateHandler;
 
     void Start()
     {
-        InvokeRepeating("ChangeState", 2, 2);
+        InvokeRepeating("ChangeState", 0, 6);
     }
 
     private void ChangeState()
     {
-        gameState = gameState == GameState.Catch ? GameState.Track : GameState.Catch;
+        gameState = gameState == GameState.Track ? GameState.Catch : GameState.Track;
         GameStateNotify();
     }
 
