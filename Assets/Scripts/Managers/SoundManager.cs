@@ -1,23 +1,46 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class SoundManager
 {
+    public enum VolumeUnit
+    {
+        //Perform volume action in decibels</param>
+        Decibel,
+        //Perform volume action in scalar
+        Scalar
+    }
+    /// <summary>
+    /// Gets the current volume
+    /// </summary>
+    /// <param name="vUnit">The unit to report the current volume in</param>
+    [DllImport("ForSetVolume")]
+    public static extern float GetSystemVolume(VolumeUnit vUnit);
+    /// <summary>
+    /// sets the current volume
+    /// </summary>
+    /// <param name="newVolume">The new volume to set</param>
+    /// <param name="vUnit">The unit to set the current volume in</param>
+    [DllImport("ForSetVolume")]
+    public static extern void SetSystemVolume(double newVolume, VolumeUnit vUnit);
+
     AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
+    
 
     // MP3 Player   -> AudioSource
     // MP3 음원     -> AudioClip
     // 관객(귀)     -> AudioListener
-
     public void Init()
     {
         GameObject root = GameObject.Find("@Sound");
         if (root == null)
         {
             root = new GameObject { name = "@Sound" };
-            Object.DontDestroyOnLoad(root);
+            UnityEngine.Object.DontDestroyOnLoad(root);
 
             string[] soundNames = System.Enum.GetNames(typeof(Define.Sound));
             for (int i = 0; i < soundNames.Length - 1; i++)

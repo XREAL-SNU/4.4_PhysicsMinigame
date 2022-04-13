@@ -72,6 +72,7 @@ public class CameraController : MonoBehaviour
                     _selectedObjectColor = _selectedObject.GetComponent<Renderer>().material.color;
                     _selectedObject.GetComponent<Renderer>().material.SetColor("_Color",
                         new Color(0.0f, 0.0f, 1.0f, 0.1f));
+                    _selectedObject.GetComponent<BoxCollider>().isTrigger = true;
                 }
             }
             else
@@ -89,6 +90,7 @@ public class CameraController : MonoBehaviour
             _selectedObject.GetComponent<Rigidbody>().useGravity = true;
             _selectedObject.GetComponent<Renderer>().material.SetColor("_Color",
                         _selectedObjectColor);
+            _selectedObject.GetComponent<BoxCollider>().isTrigger = false;
             _selectedObject = null;
         }
     }
