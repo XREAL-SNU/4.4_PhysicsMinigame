@@ -37,4 +37,8 @@ public class Interface : MonoBehaviour
     public virtual void onCollision() {
 
     }
+
+    public virtual bool getIsClicked() {
+        return false;
+    }
 }

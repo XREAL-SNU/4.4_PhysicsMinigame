@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     private GameBox gameBox;
     private Dictionary<string, Interface> interfaceList = new Dictionary<string, Interface>();
+    private SceneUI sceneUI;
+    private bool isClear = false;
 
     private void Awake() {
         if(_instance == null) {
@@ -23,13 +25,23 @@ public class GameManager : MonoBehaviour
         }   
     }
 
+    public void Update() {
+        if(isClear) {
+            sceneUI.Clear();
+        }
+    }
+
     public void addGameBox(GameBox _gameBox) {
         gameBox = _gameBox;
-        Debug.Log(gameBox);
     }
 
     public void addInterface(string InterfaceName, Interface _interface) {
         interfaceList.Add(InterfaceName, _interface);
+    }
+
+    public void addSceneUI(SceneUI _sceneUI) {
+        sceneUI = _sceneUI;
+        Debug.Log(sceneUI);
     }
 
     public Interface getInterface(string interfaceName) {
@@ -42,5 +54,9 @@ public class GameManager : MonoBehaviour
 
     public GameBox getGameBox() {
         return gameBox;
+    }
+
+    public void setClear(bool clear) {
+        isClear = clear;
     }
 }
