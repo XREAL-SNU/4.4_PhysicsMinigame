@@ -41,8 +41,8 @@ public class Managers : MonoBehaviour
             for(int i = 0; i < 10; i++)
             {
                 GameObject child = _resource.Instantiate(obj, parent.transform);
-                child.transform.position = new Vector3(UnityEngine.Random.Range(-5, 5), 
-                     0.01f, UnityEngine.Random.Range(-5, 5));
+                child.transform.position = new Vector3(UnityEngine.Random.Range(-4, 4), 
+                     0.05f, UnityEngine.Random.Range(-4, 4));
             }
 
         }
@@ -51,7 +51,7 @@ public class Managers : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             GameObject child = _resource.Instantiate("Plane", parent.transform);
-            child.transform.position = new Vector3(0.0f, i+1.5f, 0.0f);
+            child.transform.position = new Vector3(0.0f, i+1.95f, 0.0f);
             child.name += i.ToString();
             _planes[i] = child.GetComponent<Plane>();
         }
@@ -80,7 +80,7 @@ public class Managers : MonoBehaviour
             SoundManager.SetSystemVolume((double)0.1 * i, SoundManager.VolumeUnit.Scalar);
             curVolume = i;
             volumeText.text = $"Volume: {i*10}";
-            audioSource.volume = (float)0.1 * i;
+            audioSource.volume = (float)0.05 * i;
         }
     }
 

@@ -19,7 +19,7 @@ public class Plane : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Object") && !collider)
+        if (!collider)
         {
             _isContact = true;
             collider = other;
