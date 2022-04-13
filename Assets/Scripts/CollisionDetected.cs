@@ -11,12 +11,16 @@ public class CollisionDetected : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.name == "Cube") {
-            GameBox gameBox = GameManager.Instance().getGameBox();
-            gameBox.Shaking();
-            Furniture furniture = gameBox.transform.Find("Furniture").gameObject.GetComponent<Furniture>();
-            furniture.Jumping();
-            Debug.Log("Collision");
+        if(collision.gameObject.name == "Brick") {
+            Interface Brick = GameManager.Instance().getInterface("Brick");
+            if(GameManager.Instance().getInterface("Brick").getIsEnoughHeight()) {
+                GameBox gameBox = GameManager.Instance().getGameBox();
+                gameBox.Shaking();
+                Furniture furniture = gameBox.transform.Find("Furniture").gameObject.GetComponent<Furniture>();
+                furniture.Jumping();
+                Brick.onCollision();
+                Debug.Log("Collision");
+            }
         }
     }
 }

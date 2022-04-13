@@ -17,6 +17,7 @@ public class GameBox : MonoBehaviour
         CurrentPosition = transform.position;
         GameManager.Instance().addGameBox(this.GetComponent<GameBox>());
         shakingSequence = DOTween.Sequence()
+        .SetAutoKill(false)
         .Join(transform.DOLocalMove(CurrentPosition + ShakingOffsetRightUpward, 0.1f))
         .Append(transform.DOLocalMove(CurrentPosition + ShakingOffsetLeftUpward*2, 0.1f))
         .Append(transform.DOLocalMove(CurrentPosition + ShakingOffsetLeftDownward, 0.1f))
@@ -26,12 +27,11 @@ public class GameBox : MonoBehaviour
         .Append(transform.DOLocalMove(CurrentPosition + ShakingOffsetLeftUpward*2, 0.1f))
         .Append(transform.DOLocalMove(CurrentPosition + ShakingOffsetRightUpward, 0.1f))
         .Append(transform.DOLocalMove(CurrentPosition + ShakingOffsetLeftUpward, 0.1f));
-        shakingSequence.Pause();
+        shakingSequence.SetLoops(2).Pause();
     }
 
     public void Shaking() {
-        DOTween.Sequence()
-        .Append(shakingSequence)
-        .SetLoops(2);
+        shakingSequence.Rewind();
+        shakingSequence.Play();
     }
 }
