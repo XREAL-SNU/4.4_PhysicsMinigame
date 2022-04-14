@@ -22,7 +22,7 @@ namespace EasyPrimitiveAnimals
 
         // Wander variables.
         public float moveAngle = 90f; // Define angle the animal turns after a collision.
-        public float movSpeed = 1f; // Define speed that animal moves. This is also used to calculate leg movement speed.
+        public float movSpeed = 10f; // Define speed that animal moves. This is also used to calculate leg movement speed.
 
         private bool canRotate = true;
         private bool canPeck = true;
@@ -51,7 +51,7 @@ namespace EasyPrimitiveAnimals
                 Quaternion legAngleFromB = Quaternion.Euler(this.legStartPosB);         // Set second start angle of leg.
                 Quaternion legAngleToB = Quaternion.Euler(this.legEndPosB);             // Set second end angle of leg.
 
-                float lerp = 0.5f * (1.0f + Mathf.Sin(Mathf.PI * Time.realtimeSinceStartup * this.rotSpeed));
+                float lerp = 100f * (1.0f + Mathf.Sin(Mathf.PI * Time.realtimeSinceStartup * this.rotSpeed));
 
                 FrontLegL.transform.localRotation = Quaternion.Lerp(legAngleFromA, legAngleToA, lerp);
                 FrontLegR.transform.localRotation = Quaternion.Lerp(legAngleFromB, legAngleToB, lerp);
@@ -64,7 +64,7 @@ namespace EasyPrimitiveAnimals
             } 
             else
             {
-                if (Random.Range(0, 100) > 50 && canPeck)
+                if (Random.Range(40, 100) > 50 && canPeck)
                 {
                     StartCoroutine(TimeToPeck());
                 }
@@ -88,7 +88,7 @@ namespace EasyPrimitiveAnimals
             this.transform.rotation *= Quaternion.Euler(0, moveAngle, 0);
 
             // Wait...
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(20f);
 
             // Enable option to rotate.
             canRotate = true;

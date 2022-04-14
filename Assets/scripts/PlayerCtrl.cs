@@ -12,7 +12,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private Vector3 movedirection;
 
-     float turnSmoothVelocity;
+    
     void Start() {
         
         anim=GetComponent<Animator>();
@@ -24,13 +24,13 @@ public class PlayerCtrl : MonoBehaviour
 
 
 
-     float space =Input.GetAxis("Jump");
-      Debug.Log("space");
+
+    
 
         
         if (movedirection!=Vector3.zero){
             transform.rotation=Quaternion.LookRotation(movedirection);
-            transform.Translate(Vector3.forward*Time.deltaTime*2.0f);
+            transform.Translate(Vector3.forward*Time.deltaTime*4.0f);
 
          
         }
@@ -55,14 +55,6 @@ public class PlayerCtrl : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision coll)
-     {
-        if (coll.collider.tag=="food")
-        {
-
-
-        }
-    }
-
+  
     
 }
