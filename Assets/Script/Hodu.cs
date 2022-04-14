@@ -19,11 +19,17 @@ public class Hodu : MonoBehaviour
 
 
 
+    //Animator animator;
+
+
     void Awake()
     {
         isJump = false;
         rigid = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
+        //animator = GetComponentInChildren<Animator>();
+
+
     }
 
     private void Update()
@@ -45,7 +51,13 @@ public class Hodu : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         rigid.AddForce(new Vector3(h, 0, v), ForceMode.Impulse);
-        // y축은 점프여서 일단 0으로 세
+        // y축은 점프여서 일단 0으로 세기
+
+
+
+        //animator.SetBool("isRun", rigid.AddForce != Vector3.zero);
+
+
 
     }
 
@@ -94,8 +106,8 @@ public class Hodu : MonoBehaviour
             if (bitcoinItemCount == manager.TotalItemCount)
             {
 
-                SceneManager.LoadScene("Main" + (manager.stage+1).ToString() );
-         
+                SceneManager.LoadScene("Main" + (manager.stage + 1).ToString());
+
                 //문자열인지 아닌지 걱정될때 ToString()더하면 됨 
                 //game clear
 
@@ -106,8 +118,8 @@ public class Hodu : MonoBehaviour
             {
 
                 // restart
-                SceneManager.LoadScene("Main"+manager.stage);
-                
+                SceneManager.LoadScene("Main" + manager.stage);
+
 
 
             }
