@@ -11,6 +11,7 @@ public class Hodu : MonoBehaviour
     public float jumpPower;
     public int bitcoinItemCount;
     public GameManagerLogic manager;
+
     bool isJump;
     Rigidbody rigid;
     AudioSource audio;
@@ -61,7 +62,6 @@ public class Hodu : MonoBehaviour
 
 
         //비트코인 카운트 추가
-
         if (other.name == "Bitcoin")
         {
             bitcoinItemCount++;
@@ -69,8 +69,7 @@ public class Hodu : MonoBehaviour
 
 
 
-        // 만약에 코인을 먹으면 소리 나오	
-
+        // 만약에 코인을 먹으면 소리 
         if (other.tag == "Coins")
         {
             audio.Play();
@@ -78,33 +77,44 @@ public class Hodu : MonoBehaviour
 
             other.gameObject.SetActive(false);
             // SetActive(bool): 오브젝트 활성화 비활성, 여기서는 비활성화
-
         }
 
-        else if (other.name == "Finish Point") {
+
+
+
+        if (other.tag == "Finish")
+        {
+
+
+
+
+
 
 
             if (bitcoinItemCount == manager.TotalItemCount)
             {
 
-                SceneManager.LoadScene("Sucess");
+                SceneManager.LoadScene("Main" + (manager.stage+1).ToString() );
+         
+                //문자열인지 아닌지 걱정될때 ToString()더하면 됨 
                 //game clear
 
             }
 
 
-            else {
+            else
+            {
 
                 // restart
-                SceneManager.LoadScene("Fail");
+                SceneManager.LoadScene("Main"+manager.stage);
+                
+
 
             }
 
 
 
-            //Find함수는 CPU 함수 부하를 초래할 수 있어서 피하는 것을 권장 
-
-
+            //Find함수는 CPU 함수 부하를 초래할 수 있어서 피하는 것을 권장
 
 
 

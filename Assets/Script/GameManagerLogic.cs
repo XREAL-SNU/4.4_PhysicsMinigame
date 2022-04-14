@@ -7,11 +7,7 @@ public class GameManagerLogic : MonoBehaviour
 
 
     public int TotalItemCount;
-
-
-
-
-
+    public int stage;
 
 
 
