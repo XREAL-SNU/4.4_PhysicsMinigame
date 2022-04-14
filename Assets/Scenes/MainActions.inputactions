@@ -37,7 +37,7 @@
                 {
                     "name": "up",
                     "id": "1ada7cfe-c61b-4a4c-a514-5a78633ca390",
-                    "path": "",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -48,7 +48,7 @@
                 {
                     "name": "down",
                     "id": "59c008d9-ca15-4677-aba6-45db6ee77170",
-                    "path": "",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
