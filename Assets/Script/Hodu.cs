@@ -9,10 +9,13 @@ public class Hodu : MonoBehaviour
 
 
     public float jumpPower;
+    bool isJump;
+
+
     public int bitcoinItemCount;
     public GameManagerLogic manager;
 
-    bool isJump;
+
     Rigidbody rigid;
     AudioSource audio;
 
@@ -34,7 +37,7 @@ public class Hodu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump") && !isJump)
+        if (Input.GetButtonDown("Jump")&& !isJump)
         {
             isJump = true;
             rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
@@ -63,7 +66,7 @@ public class Hodu : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Floor")
+        if (collision.gameObject.tag == "Floor")
             isJump = false;
     }
 
@@ -99,13 +102,8 @@ public class Hodu : MonoBehaviour
 
 
 
-
-
-
-
             if (bitcoinItemCount == manager.TotalItemCount)
             {
-
                 SceneManager.LoadScene("Main" + (manager.stage + 1).ToString());
 
                 //문자열인지 아닌지 걱정될때 ToString()더하면 됨 
