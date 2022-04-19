@@ -8,11 +8,13 @@ public class Hodu : MonoBehaviour
 {
 
 
-    public float jumpPower;
-    bool isJump;
+    public float firstJumpPower;// 뛰는 높이
+    public float secondJumpPower;
+    bool isGround;
+    bool firstJump;
+    bool secondJump;
 
-
-    public int bitcoinItemCount;
+    public int bitcoinItemCount;// 먹은 비트코인 개수
     public GameManagerLogic manager;
 
 
@@ -20,31 +22,45 @@ public class Hodu : MonoBehaviour
     AudioSource audio;
 
 
-
-
     //Animator animator;
 
 
     void Awake()
     {
-        isJump = false;
+        isGround = true;
+        firstJump = false;
+        secondJump = false;
         rigid = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
         //animator = GetComponentInChildren<Animator>();
 
-
     }
+
+
+   
+
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump")&& !isJump)
+        if (Input.GetButtonDown("Jump") && isGround==true)
         {
-            isJump = true;
-            rigid.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+            rigid.AddForce(new Vector3(0, firstJumpPower, 0), ForceMode.Impulse);
+            firstJump = true;
+            secondJump = false;
+            isGround = false;
+        }
+
+
+
+
+        if (Input.GetButtonDown("Jump") && isGround == false && firstJump == true) 
+        {
+            rigid.AddForce(new Vector3(0, secondJumpPower, 0), ForceMode.Impulse);
+            secondJump = true;
+            firstJump = false;
         }
 
     }
-
 
 
 
@@ -60,22 +76,28 @@ public class Hodu : MonoBehaviour
 
         //animator.SetBool("isRun", rigid.AddForce != Vector3.zero);
 
-
-
     }
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
-            isJump = false;
+            isGround = true;
+        Debug.Log("grounded!!!!!!!!");
+
+
     }
+
+
+
+
+
+
 
 
     private void OnTriggerEnter(Collider other)
     {
-
-
-
         //비트코인 카운트 추가
         if (other.name == "Bitcoin")
         {
@@ -108,24 +130,18 @@ public class Hodu : MonoBehaviour
 
                 //문자열인지 아닌지 걱정될때 ToString()더하면 됨 
                 //game clear
-
             }
 
 
             else
             {
-
                 // restart
                 SceneManager.LoadScene("Main" + manager.stage);
-
-
-
             }
 
 
 
             //Find함수는 CPU 함수 부하를 초래할 수 있어서 피하는 것을 권장
-
 
 
         }
