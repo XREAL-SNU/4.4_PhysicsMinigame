@@ -12,3 +12,6 @@ GameManager
 
 
 우선 single curling project를 만들자 ㅋㅋ.. 팀 짜는 건 나중에!
+
+
+

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8119766487970692372}
   - component: {fileID: 836153836739907909}
   - component: {fileID: 7943309341525727245}
+  - component: {fileID: 3355261940009458855}
   m_Layer: 0
   m_Name: 11720_Curling_Stone
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912440556627710979}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.98933, z: 0}
-  m_LocalScale: {x: 0.037735607, y: 0.037735615, z: 0.037735615}
+  m_LocalScale: {x: 0.010081056, y: 0.010081057, z: 0.010081057}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &4884336903441271402
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &7943309341525727245
 CapsuleCollider:
@@ -113,3 +114,17 @@ CapsuleCollider:
   m_Height: 19.325005
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 7.6996517}
+--- !u!114 &3355261940009458855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912440556627710979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf299b6dd21d1545a6ddd498405424c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10
+  energy: 0

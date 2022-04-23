@@ -23,8 +23,8 @@ public class StoneController : MonoBehaviour
 
     void Update()
     {
-        //_movementInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //_rb.MovePosition(_rb.position + _movementInput * _speed * Time.deltaTime);
+        _movementInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        _rb.MovePosition(_rb.position + _movementInput * _speed * Time.deltaTime);
 
         _energyInput = Input.GetAxis("Jump");
         energy += _energyInput * _speed * Time.deltaTime;
