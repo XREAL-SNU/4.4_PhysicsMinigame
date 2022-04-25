@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class GameOver : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public GameObject GameManager;
+    
+    private void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.CompareTag("Enemy")){
+            Debug.Log("GameOver!!");
+            GameManager.GetComponent<GameManager>().setGameOver();
+        }
     }
 }

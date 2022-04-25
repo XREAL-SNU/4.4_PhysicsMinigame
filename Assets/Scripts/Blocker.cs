@@ -51,7 +51,7 @@ public class Blocker : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision){
         if(collision.gameObject.CompareTag("Enemy")){
-            int remain = hit(10);
+            int remain = hit(20);
             if(remain<=0)
                 Destroy(gameObject);
         }
