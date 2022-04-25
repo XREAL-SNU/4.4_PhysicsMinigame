@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 yDirection = new Vector3(1.73205f, 1, 0);
+    void FixedUpdate()
     {
-        
+        transform.position += yDirection*0.1f;
+        if(transform.position.y > 30)
+            Destroy(gameObject);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnCollisionEnter(Collision collision){
+        if(collision.gameObject.CompareTag("Enemy")){
+            Debug.Log("Collision");
+            Destroy(gameObject);
+        }
     }
 }

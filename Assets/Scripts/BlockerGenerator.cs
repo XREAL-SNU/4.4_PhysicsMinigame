@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class BlockerGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    /*
+    public Vector3 ClickedPosition(){
+        if(!_InGame){
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit))
+                return hit.point;
+        }
+        return new Vector3(0,0,0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void BuildBlocker(){
+        Vector3 createPosition = ClickedPosition();
+
+        Debug.Log("create a blocker");
     }
+    */
 }
