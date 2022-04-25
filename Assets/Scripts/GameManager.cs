@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
     public bool changeGold(int change){
         _gold += change;
-        if(g_old < 0){
+        if(_gold < 0){
             _gold -= change;
             return false;
         }
