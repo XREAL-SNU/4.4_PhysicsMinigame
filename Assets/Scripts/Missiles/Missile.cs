@@ -8,9 +8,11 @@ public class Missile : ScriptableObject {
     public float radius = 5f;
     public float upwardsModifier = 0.1f;
 
-    public GameObject explosionFx = null;
+    public GameObject explosionFx = null, smokeFx = null;
     public GameObject missileObject = null;
     public float missileDuration = 0.5f;
+
+    public Sprite sprite;
 
     public void Fire(PlayerControl player, Vector3 pos, float str) {
         if (missileObject == null) {
@@ -24,6 +26,7 @@ public class Missile : ScriptableObject {
     private void Impact(Rigidbody player, Vector3 pos, float str) {
         player.AddExplosionForce(force * str, pos, radius, upwardsModifier);
         if (explosionFx != null) Instantiate(explosionFx, pos, Quaternion.identity);
+        if (smokeFx != null) Instantiate(smokeFx, pos, Quaternion.identity);
     }
 
     private IEnumerator MissileShoot(PlayerControl player, Vector3 pos, float str) {

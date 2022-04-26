@@ -5,10 +5,12 @@ using UnityEngine;
 public class MissileControl : MonoBehaviour {
     public PlayerControl pcon;
     public GameObject target;
+    public GameObject uiFrame, missileIconPrefab;
 
     public Missile defaultMissile;
     public Missile[] missiles;
     public Dictionary<Missile, int> inventory = new Dictionary<Missile, int>();
+    private Dictionary<Missile, MissileIcon> inventoryIcons = new Dictionary<Missile, MissileIcon>();
     private static KeyCode[] numkeys = {
         KeyCode.Alpha1,
         KeyCode.Alpha2,
@@ -36,8 +38,17 @@ public class MissileControl : MonoBehaviour {
         pcon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         current = defaultMissile;
 
+        inventoryIcons.Clear();
+        for (int i = 0; i < missiles.Length; i++) {
+            AddButton(missiles[i], i);
+        }
+
         //todo remove
         AddMissile(missiles[1], 10);
+        AddMissile(missiles[2], 20);
+        AddMissile(missiles[3], 20);
+        AddMissile(missiles[4], 20);
+        AddMissile(missiles[5], 20);
     }
 
     void Update() {
@@ -65,7 +76,7 @@ public class MissileControl : MonoBehaviour {
 
     private void SwitchMissile() {
         for (int i = 0; i < missiles.Length; i++) {
-            if (Input.GetKeyDown(numkeys[i]) && (missiles[i] == defaultMissile || inventory.ContainsKey(missiles[i]) && inventory[missiles[i]] > 0)) {
+            if (Input.GetKeyDown(numkeys[i]) && IsValid(missiles[i])) {
                 current = missiles[i];
                 break;
             }
@@ -79,6 +90,7 @@ public class MissileControl : MonoBehaviour {
         }
         else {
             inventory.Add(missile, amount);
+            inventoryIcons[missile].gameObject.SetActive(true);
         }
     }
 
@@ -93,5 +105,17 @@ public class MissileControl : MonoBehaviour {
 
         if (inventory[missile] <= 0) current = defaultMissile;
         return true;
+    }
+
+    public bool IsValid(Missile m) {
+        return m == defaultMissile || (inventory.ContainsKey(m) && inventory[m] > 0);
+    }
+
+    private void AddButton(Missile m, int i) {
+        MissileIcon mi = Instantiate(missileIconPrefab, Vector3.zero, Quaternion.identity).GetComponent<MissileIcon>();
+        mi.transform.SetParent(uiFrame.transform, false);
+        mi.Set(this, m, i+1);
+
+        if(m != defaultMissile) inventoryIcons.Add(m, mi);
     }
 }

@@ -9,7 +9,6 @@ public class Block : MonoBehaviour {
 
     protected virtual void Update() {
         if (transform.position.y < playerGroundy - (DESPAWNLAYER + 1) * LAYERDIST - 1f) {
-            Debug.Log("Goodbye");
             Destroy(gameObject);
         }
     }

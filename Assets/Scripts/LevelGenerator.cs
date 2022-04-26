@@ -16,9 +16,16 @@ public class LevelGenerator : MonoBehaviour {
     public GameObject border;
     public PlayerControl pcon;
 
+    public static PlayerControl pconInstance;
+
     private float seed;
 
+    private void Awake() {
+        playerGroundy = 0f;
+    }
+
     void Start() {
+        pconInstance = pcon;
         offsetGround = new Vector2(0, 0);
         MakeFloor(0f);
         seed = Random.value * 1000f;
@@ -56,14 +63,14 @@ public class LevelGenerator : MonoBehaviour {
                 if (additionalBlocks) {
                     foreach(Block b in blockPrefabs) {
                         if(Perlin(b, i, j, scl, thresh, offset, density)) {
-                            SetBlock(b, i + offsetGround.x, j + offsetGround.y, y);
+                            SetBlock(b, i + offsetGround.x, j + offsetGround.y, y + HeightMap((int)(y / LAYERDIST), i, j));
                             placed = true; break;
                         }
                     }
                 }
 
                 if (!placed && Perlin(defaultBlock, i, j, scl, thresh, offset, density)) {
-                    SetBlock(defaultBlock, i + offsetGround.x, j + offsetGround.y, y);
+                    SetBlock(defaultBlock, i + offsetGround.x, j + offsetGround.y, y + HeightMap((int)(y / LAYERDIST), i, j));
                 }
             }
         }
@@ -84,11 +91,17 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     private float Thresh(int l) {
-        return Mathf.Clamp(0.5f - l / 100f, 0.2f, 0.4f);
+        return Mathf.Clamp(0.5f - l / 500f, 0.2f, 0.4f);
     }
 
     private float Density(int l) {
-        return Mathf.Clamp(1f - l / 200f, 0.5f, 1f);
+        return Mathf.Clamp(1f - l / 1000f, 0.5f, 1f);
+    }
+
+    private int HeightMap(int l, float x, float y) {
+        if (l < 15) return 0;
+        if (Chance(1 - l / 50f)) return 0;
+        return Mathf.FloorToInt(Mathf.PerlinNoise((x / 3f + l * 497) % 1f, (y / 3f + seed) % 1f) * 3) - 1;
     }
 
     public bool Perlin(Block block, float x, float y, float scl, float thresh, float offset, float density) {

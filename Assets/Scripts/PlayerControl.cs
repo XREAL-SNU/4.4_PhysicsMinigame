@@ -17,10 +17,15 @@ public class PlayerControl : MonoBehaviour {
             //ded
             Kill();
         }
-        //todo playerthingy
     }
 
     public void Kill() {
         SceneManager.LoadScene("GameScene");
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        if(!collision.collider.isTrigger && transform.position.y >= 0.5f + collision.transform.position.y && collision.transform.position.y > playerGroundy) {
+            playerGroundy = collision.transform.position.y;
+        }
     }
 }
