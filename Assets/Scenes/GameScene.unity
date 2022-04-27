@@ -1268,6 +1268,7 @@ MonoBehaviour:
   taltitude: {fileID: 459496934}
   treached: {fileID: 871207092}
   player: {fileID: 939525610}
+  deltar: 0
 --- !u!1 &2021826878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,6 +1419,17 @@ MonoBehaviour:
   floorBlock: {fileID: 8535146368219321793, guid: 48618e743f1760c4ab6b331899e6722e, type: 3}
   blockPrefabs:
   - {fileID: 8535146368219321793, guid: 48618e743f1760c4ab6b331899e6722e, type: 3}
+  items:
+  - {fileID: -6038585637310197382, guid: f2f4f78382b98154ebb829aa8017cd7d, type: 3}
+  - {fileID: -6038585637310197382, guid: f2f4f78382b98154ebb829aa8017cd7d, type: 3}
+  - {fileID: 2971096687195494817, guid: 82fe02b2c5570c846bde306f13210156, type: 3}
+  - {fileID: 2971096687195494817, guid: 82fe02b2c5570c846bde306f13210156, type: 3}
+  - {fileID: 2971096687195494817, guid: 82fe02b2c5570c846bde306f13210156, type: 3}
+  - {fileID: 2101019335209881778, guid: 5aff01e06c1b22841a7342f6355fba2b, type: 3}
+  - {fileID: 2101019335209881778, guid: 5aff01e06c1b22841a7342f6355fba2b, type: 3}
+  - {fileID: 2101019335209881778, guid: 5aff01e06c1b22841a7342f6355fba2b, type: 3}
+  - {fileID: -5188705073959987550, guid: a6c0d5703106a0a40949700b1c0d3633, type: 3}
+  - {fileID: 2181366531689569047, guid: 45f259f443ed20c43bbb5b7e3850a778, type: 3}
   border: {fileID: 379477761545504420, guid: 608151704a6a38d40b4771e651cab06f, type: 3}
   pcon: {fileID: 939525616}
 --- !u!1 &2118340170

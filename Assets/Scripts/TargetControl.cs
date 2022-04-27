@@ -15,7 +15,7 @@ public class TargetControl : MonoBehaviour {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out RaycastHit rinfo, 50f, 1 << 6)) {
             Vector3 d = rinfo.point;
-            d.y = Mathf.Round(d.y / LevelGenerator.LAYERDIST) * LevelGenerator.LAYERDIST + 0.5f;
+            d.y = Mathf.Round(d.y - 0.5f) + 0.5f;
             transform.position = d;
         }
 

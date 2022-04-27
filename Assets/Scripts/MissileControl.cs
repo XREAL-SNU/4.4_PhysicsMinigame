@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MissileControl : MonoBehaviour {
     public PlayerControl pcon;
@@ -34,6 +35,12 @@ public class MissileControl : MonoBehaviour {
     public const float CHARGETIME = 2f, MAXCHARGE = 1f;
     public float charge = 0f;
 
+    public static MissileControl instance;
+
+    private void Awake() {
+        instance = this;
+    }
+
     void Start() {
         pcon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         current = defaultMissile;
@@ -43,12 +50,12 @@ public class MissileControl : MonoBehaviour {
             AddButton(missiles[i], i);
         }
 
-        //todo remove
+        /*
         AddMissile(missiles[1], 10);
         AddMissile(missiles[2], 20);
         AddMissile(missiles[3], 20);
         AddMissile(missiles[4], 20);
-        AddMissile(missiles[5], 20);
+        AddMissile(missiles[5], 20);*/
     }
 
     void Update() {
@@ -57,7 +64,7 @@ public class MissileControl : MonoBehaviour {
             SwitchMissile();
         }
         else {
-            if (Input.GetMouseButton(0)) {
+            if (Input.GetMouseButton(0) && (inputDown || !EventSystem.current.IsPointerOverGameObject())) {
                 inputDown = true;
                 charge += Time.deltaTime;
                 if (charge > CHARGETIME) charge = CHARGETIME;
@@ -66,7 +73,7 @@ public class MissileControl : MonoBehaviour {
                 if (inputDown) {
                     //shoot
                     inputDown = false;
-                    if (UseMissile(current)) reload = 0f;
+                    if (!Input.GetMouseButton(1) && UseMissile(current)) reload = 0f;
                     charge = 0f;
                 }
                 SwitchMissile();

@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour {
     }
 
     void Update() {
-        if(transform.position.y < playerGroundy - (DESPAWNLAYER + 1) * LAYERDIST - 1f) {
+        if(transform.position.y < playerGroundy - (DESPAWNLAYER + 1) * LAYERDIST - 15f) {
             //ded
             Kill();
         }
@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if(!collision.collider.isTrigger && transform.position.y >= 0.5f + collision.transform.position.y && collision.transform.position.y > playerGroundy) {
+        if(!collision.collider.isTrigger && rigid.velocity.y < 0.1f && transform.position.y >= 0.2f + collision.transform.position.y && collision.transform.position.y > playerGroundy) {
             playerGroundy = collision.transform.position.y;
         }
     }

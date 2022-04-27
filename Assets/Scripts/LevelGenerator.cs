@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour {
     public const int SIZE = 7;
     public const float LAYERDIST = 5f;
-    public const int DESPAWNLAYER = 2;
+    public const int DESPAWNLAYER = 3;
 
     public static float playerGroundy = 0f;
     public int lastLevel = 0;
@@ -13,6 +13,7 @@ public class LevelGenerator : MonoBehaviour {
 
     public Block defaultBlock, floorBlock;
     public Block[] blockPrefabs;
+    public Block[] items;
     public GameObject border;
     public PlayerControl pcon;
 
@@ -52,6 +53,10 @@ public class LevelGenerator : MonoBehaviour {
 
         MakeLayerBlocks(level * LAYERDIST, Scl(level), Thresh(level), level * SIZE * 2f, Density(level), defaultBlock, true);
 
+        if (level > 6 && Chance(0.2f + Mathf.Clamp(0.03f * level, 0, 0.5f))) SetBlock(items[Random.Range(0, items.Length)],
+             Random.Range(-SIZE / 2f, SIZE / 2f) + offsetGround.x,
+             Random.Range(-SIZE / 2f, SIZE / 2f) + offsetGround.y,
+             level * LAYERDIST + 1f);
         //todo wind, ice sections, ect
     }
 
@@ -74,7 +79,6 @@ public class LevelGenerator : MonoBehaviour {
                 }
             }
         }
-
         Instantiate(border, new Vector3(offsetGround.x, y, offsetGround.y), Quaternion.identity);
     }
 
