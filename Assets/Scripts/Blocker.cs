@@ -45,8 +45,10 @@ public class Blocker : MonoBehaviour
     }
     void Update(){
         if(!created){
-            created = true;
-            StartCoroutine(FireBullet());
+            if(GameManager.Instance.getInGame()){
+                created = true;
+                StartCoroutine(FireBullet());
+            }
         }
     }
     private void OnCollisionEnter(Collision collision){

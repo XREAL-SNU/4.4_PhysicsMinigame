@@ -20,6 +20,10 @@ public class CameraMovement : MonoBehaviour
         _InGame = false;
     }
 
+    void Awake(){
+        CameraOutGame();
+    }
+
     void FixedUpdate(){
         if(!_InGame){
             Vector3 ViewPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);

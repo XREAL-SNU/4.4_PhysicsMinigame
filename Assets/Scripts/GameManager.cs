@@ -9,10 +9,26 @@ public class GameManager : MonoBehaviour
     // If true, the game is over.
     private bool _GameOver;
     private bool _InGame;
+    private static GameManager instance = null;
+    public GameObject BlockerGenerator;
 
     void Awake()
     {
+        if(instance == null){
+            instance = this;
+        }
+        else{
+            Destroy(gameObject);
+        }
         init();
+    }
+
+    public static GameManager Instance{
+        get{
+            if(null == instance)
+                return null;
+            return instance;
+        }
     }
 
     public void init(){
@@ -53,7 +69,8 @@ public class GameManager : MonoBehaviour
     public bool getInGame(){
         return _InGame;
     }
-    public void setInGame(bool set){
-        _InGame = set;
+    public void setInGame(){
+        _InGame = true;
+        BlockerGenerator.GetComponent<BlockerGenerator>().setInGame();
     }
 }
