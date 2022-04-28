@@ -36,9 +36,11 @@ public class MissileControl : MonoBehaviour {
     public float charge = 0f;
 
     public static MissileControl instance;
+    public static int missilesUsed = 0;
 
     private void Awake() {
         instance = this;
+        missilesUsed = 0;
     }
 
     void Start() {
@@ -50,12 +52,14 @@ public class MissileControl : MonoBehaviour {
             AddButton(missiles[i], i);
         }
 
-        /*
-        AddMissile(missiles[1], 10);
-        AddMissile(missiles[2], 20);
-        AddMissile(missiles[3], 20);
-        AddMissile(missiles[4], 20);
-        AddMissile(missiles[5], 20);*/
+        if (true) {
+            AddMissile(missiles[1], 10);
+            AddMissile(missiles[2], 15);
+            AddMissile(missiles[3], 5);
+            AddMissile(missiles[4], 20);
+            AddMissile(missiles[5], 8);
+            AddMissile(missiles[6], 18);
+        }
     }
 
     void Update() {
@@ -104,11 +108,13 @@ public class MissileControl : MonoBehaviour {
     public bool UseMissile(Missile missile) {
         if (missile == defaultMissile) {
             missile.Fire(pcon, target.transform.position, 1f + charge / CHARGETIME * MAXCHARGE);
+            missilesUsed++;
             return true;
         }
         if (!inventory.ContainsKey(missile) || inventory[missile] <= 0) return false;
         missile.Fire(pcon, target.transform.position, 1f + charge / CHARGETIME * MAXCHARGE);
         inventory[missile]--;
+        missilesUsed++;
 
         if (inventory[missile] <= 0) current = defaultMissile;
         return true;

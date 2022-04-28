@@ -103,8 +103,8 @@ public class LevelGenerator : MonoBehaviour {
     }
 
     private int HeightMap(int l, float x, float y) {
-        if (l < 15) return 0;
-        if (Chance(1 - l / 50f)) return 0;
+        if (l < 50) return 0;
+        if (Chance(1 - (l - 50) / 50f)) return 0;
         return Mathf.FloorToInt(Mathf.PerlinNoise((x / 3f + l * 497) % 1f, (y / 3f + seed) % 1f) * 3) - 1;
     }
 

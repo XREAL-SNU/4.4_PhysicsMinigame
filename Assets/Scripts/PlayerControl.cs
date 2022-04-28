@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using static LevelGenerator;
 
 public class PlayerControl : MonoBehaviour {
     public Rigidbody rigid;
     public Camera cam;
+    public ScoreModule score;
 
     void Awake() {
         rigid = GetComponent<Rigidbody>();
@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour {
     }
 
     public void Kill() {
-        SceneManager.LoadScene("GameScene");
+        score.End();
     }
 
     private void OnCollisionEnter(Collision collision) {

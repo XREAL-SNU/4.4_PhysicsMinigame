@@ -23,7 +23,7 @@ public class Missile : ScriptableObject {
         }
     }
 
-    private void Impact(Rigidbody player, Vector3 pos, float str) {
+    protected virtual void Impact(Rigidbody player, Vector3 pos, float str) {
         player.AddExplosionForce(force * str, pos, radius, upwardsModifier);
         if (explosionFx != null) Instantiate(explosionFx, pos, Quaternion.identity);
         if (smokeFx != null) Instantiate(smokeFx, pos, Quaternion.identity);

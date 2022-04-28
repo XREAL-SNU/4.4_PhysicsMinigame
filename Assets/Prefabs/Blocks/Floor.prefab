@@ -110,3 +110,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scl: 5
   thresh: 0.7
+  destroyFx: {fileID: 3118978194580274893, guid: 0eb7a8da6676b3b45bdba969c425f0ec, type: 3}

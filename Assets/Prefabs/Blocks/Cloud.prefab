@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6312585535265518770}
   - component: {fileID: 2709341546377038926}
   - component: {fileID: 1517052186807531710}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scl: 5
   thresh: 1
+  destroyFx: {fileID: 3118978194580274893, guid: aaa730df770e61a45abd2b2b31b2d50e, type: 3}
 --- !u!65 &4614368743240273933
 BoxCollider:
   m_ObjectHideFlags: 0
