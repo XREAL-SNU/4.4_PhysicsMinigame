@@ -4,45 +4,51 @@ using UnityEngine;
 
 public class Stick : MonoBehaviour
 {
+    Rigidbody m_Rigidbody;
+    public float m_Thrust = 2000f;
     private bool shouldShoot = false;
+    private bool didShoot = false;
 
-    // Start is called before the first frame update
     void Start()
     {
-    
+        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (shouldShoot)
         {
-            transform.Translate(4 * Time.deltaTime * Vector3.up);
+            m_Rigidbody.AddForce(transform.up * m_Thrust);
+            didShoot = true;
+        }
+        else if (didShoot)
+        {
+            m_Rigidbody.AddForce(-m_Thrust * transform.up);
+        }
+
+        Ray ray = new(transform.position, transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hitData))
+        {
+            if (hitData.collider.CompareTag("TargetBall"))
+            {
+                Debug.Log("Hit!");
+            }
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        StartCoroutine(shit());
+        shouldShoot = false;
     }
 
     private void OnMouseDrag()
-    {
-        // 1. Rotate Y axis
-        // 2. Rotate Z axis
-        // Shoot after drag off in other method
-
-        // Test: Shoot
+    {        
+        transform.RotateAround(transform.position, Vector3.up, 80 * Time.deltaTime);
     }
 
     private void OnMouseUp()
     {
         shouldShoot = true;
-    }
-
-    IEnumerator shit()
-    {
-        yield return new WaitForSeconds(0.0001f);
-        shouldShoot = false;
     }
 }
