@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6312585535265518770}
   - component: {fileID: 2709341546377038926}
   - component: {fileID: 1517052186807531710}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
-  m_TagString: Block
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

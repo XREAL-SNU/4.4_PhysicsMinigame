@@ -24,7 +24,10 @@ public class PlayerControl : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if(!collision.collider.isTrigger && rigid.velocity.y < 0.1f && transform.position.y >= 0.2f + collision.transform.position.y && collision.transform.position.y > playerGroundy) {
+        //Debug.Log("Col: "+collision.gameObject.name);
+        //Debug.Log("Vel: " + rigid.velocity.y);
+        //Debug.Log("Dst: "+(transform.position.y - collision.transform.position.y));
+        if(!collision.collider.isTrigger && (rigid.velocity.y < 0.8f || (rigid.velocity.y < 1.3f && collision.gameObject.CompareTag("Platform"))) && transform.position.y >= 0.2f + collision.transform.position.y && collision.transform.position.y > playerGroundy) {
             playerGroundy = collision.transform.position.y;
         }
     }
