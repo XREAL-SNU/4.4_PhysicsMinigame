@@ -48,7 +48,7 @@ public class LevelGenerator : MonoBehaviour {
 
     public void MakeLevel(int level) {
         if (lastLevel >= level) return;
-        if(Chance(0.1f * (level - 10))) offsetGround += new Vector2(Random.Range(0, 0.3f), Random.Range(0, 0.3f));
+        //if(Chance(0.1f * (level - 10))) offsetGround += new Vector2(Random.Range(0, 0.3f), Random.Range(0, 0.3f));
         lastLevel = level;
 
         MakeLayerBlocks(level * LAYERDIST, Scl(level), Thresh(level), level * SIZE * 2f, Density(level), defaultBlock, true);

@@ -41,8 +41,8 @@ public class ScoreModule : MonoBehaviour {
     }
 
     public int CalculateScore() {
-        int sc = Mathf.FloorToInt(LevelGenerator.playerGroundy + Mathf.Max(0, currentHighAlt - LevelGenerator.playerGroundy) / 3f);
-        sc = Mathf.Max(sc / 2, sc - MissileControl.missilesUsed * 3);
+        int sc = Mathf.FloorToInt(LevelGenerator.playerGroundy * 5f + Mathf.Max(0, currentHighAlt - LevelGenerator.playerGroundy) * 5f / 3f);
+        sc = (int)Mathf.Max(sc * 0.7f, sc - MissileControl.missilesUsed * 0.2f);
         return sc;
     }
 

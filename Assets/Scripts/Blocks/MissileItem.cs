@@ -22,6 +22,7 @@ public class MissileItem : Block {
     protected virtual void OnTriggerEnter(Collider collision) {
         if (collision.gameObject.CompareTag("Player")) {
             if (hitFx != null) Instantiate(hitFx, transform.position, Quaternion.identity);
+            if (sound != null) AudioModule.main.At(sound, transform.position, volume * 0.7f);
             MissileControl.instance.AddMissile(missile, 1);
             Destroy(gameObject);
         }

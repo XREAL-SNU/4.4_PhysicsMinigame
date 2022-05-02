@@ -153,6 +153,8 @@ MonoBehaviour:
   scl: 5
   thresh: 1
   destroyFx: {fileID: 3118978194580274893, guid: aaa730df770e61a45abd2b2b31b2d50e, type: 3}
+  sound: {fileID: 8300000, guid: 9753d552dcd1fb0459def1692521d9e7, type: 3}
+  volume: 1
 --- !u!65 &4614368743240273933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -160,7 +162,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8535146368219321792}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e6bcbaa16834c3147b951ddfbb6a3094, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2

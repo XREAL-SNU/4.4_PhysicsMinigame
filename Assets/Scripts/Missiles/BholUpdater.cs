@@ -8,6 +8,7 @@ public class BholUpdater : MonoBehaviour {
     public float upwardsModifier = 0f;
     public float duration = 4f;
 
+    public new AudioSource audio;
     private Vector3 pos;
     private float time = 0f;
     private PlayerControl pcon;
@@ -42,9 +43,11 @@ public class BholUpdater : MonoBehaviour {
 
     private IEnumerator Despawn() {
         float t = 0;
+        float v = audio.volume;
         while (t < 0.5f) {
             t += Time.deltaTime;
             transform.localScale = Vector3.one * ((1f - t / 0.5f) * 0.7f);
+            audio.volume = v * (1f - t / 0.5f);
             yield return null;
         }
 

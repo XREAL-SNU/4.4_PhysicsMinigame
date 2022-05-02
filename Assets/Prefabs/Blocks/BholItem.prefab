@@ -98,6 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scl: 5
   thresh: 0.7
+  destroyFx: {fileID: 0}
+  sound: {fileID: 8300000, guid: dd391f3f85c37eb4aabef9161425595d, type: 3}
+  volume: 1
   missile: {fileID: 11400000, guid: 6344884e7b1a2bc4f81c8aa86e44cd4b, type: 2}
   initRotation: {x: 30, y: 0, z: 0}
   spin: 60

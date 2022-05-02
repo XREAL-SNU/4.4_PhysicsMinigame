@@ -19,4 +19,7 @@ MonoBehaviour:
   smokeFx: {fileID: 3118978194580274893, guid: f95285f148669774ba1c7e81ed96565d, type: 3}
   missileObject: {fileID: 1374063425668206, guid: e78d953c8cb240944973b2fd40d18f39, type: 3}
   missileDuration: 0.2
+  explosionSound: {fileID: 8300000, guid: a800f9d1b9200fa4c9ebd58a4c5d2380, type: 3}
+  shootSound: {fileID: 8300000, guid: d65b5be17023a134fb3e7b62af5c562d, type: 3}
+  explosionVolume: 0.7
   sprite: {fileID: 21300000, guid: f77d64e631f51eb4aa3edbca30513b18, type: 3}

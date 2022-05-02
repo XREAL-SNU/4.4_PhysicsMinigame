@@ -12,6 +12,9 @@ public class Missile : ScriptableObject {
     public GameObject missileObject = null;
     public float missileDuration = 0.5f;
 
+    public AudioClip explosionSound = null, shootSound = null;
+    public float explosionVolume = 1f;
+
     public Sprite sprite;
 
     public void Fire(PlayerControl player, Vector3 pos, float str) {
@@ -19,6 +22,7 @@ public class Missile : ScriptableObject {
             Impact(player.rigid, pos, str);
         }
         else {
+            if (shootSound != null) AudioModule.main.At(shootSound, pos, 0.5f, Random.Range(0.8f, 1.2f));
             player.StartCoroutine(MissileShoot(player, pos, str));
         }
     }
@@ -27,6 +31,7 @@ public class Missile : ScriptableObject {
         player.AddExplosionForce(force * str, pos, radius, upwardsModifier);
         if (explosionFx != null) Instantiate(explosionFx, pos, Quaternion.identity);
         if (smokeFx != null) Instantiate(smokeFx, pos, Quaternion.identity);
+        if (explosionSound != null) AudioModule.main.At(explosionSound, pos, explosionVolume, Random.Range(0.9f, 1.05f));
     }
 
     private IEnumerator MissileShoot(PlayerControl player, Vector3 pos, float str) {

@@ -52,14 +52,14 @@ public class MissileControl : MonoBehaviour {
             AddButton(missiles[i], i);
         }
 
-        /*if (true) {
+        if (true) {
             AddMissile(missiles[1], 10);
             AddMissile(missiles[2], 15);
             AddMissile(missiles[3], 5);
             AddMissile(missiles[4], 20);
             AddMissile(missiles[5], 8);
             AddMissile(missiles[6], 18);
-        }*/
+        }
     }
 
     void Update() {

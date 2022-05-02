@@ -112,6 +112,8 @@ MonoBehaviour:
   scl: 5
   thresh: 0.7
   destroyFx: {fileID: 0}
+  sound: {fileID: 8300000, guid: dd391f3f85c37eb4aabef9161425595d, type: 3}
+  volume: 1
   missile: {fileID: 11400000, guid: 3e4f3e4f7f1d8b7488d105db34e814e8, type: 2}
   initRotation: {x: 30, y: 0, z: 0}
   spin: 60

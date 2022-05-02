@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: BasicMissile
   m_EditorClassIdentifier: 
   force: 700
-  radius: 3
+  radius: 4
   upwardsModifier: 0.05
   explosionFx: {fileID: 3118978194580274893, guid: 865083300177aab4fa1a908c6521a15f, type: 3}
   smokeFx: {fileID: 3118978194580274893, guid: e895eccbedb03bc429f9b4f2f8409df5, type: 3}
   missileObject: {fileID: 1374063425668206, guid: ead37259f0f022445a0b7e6cbb6df28a, type: 3}
   missileDuration: 0.5
+  explosionSound: {fileID: 8300000, guid: 9ff62f881cd36d74d8521f64310dda74, type: 3}
+  shootSound: {fileID: 8300000, guid: 4e52800ce6da5724295a8d56824dc569, type: 3}
+  explosionVolume: 1
   sprite: {fileID: 21300000, guid: 1c191d7c1218e444dabec2106ea42c7a, type: 3}
