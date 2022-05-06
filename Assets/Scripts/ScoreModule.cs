@@ -10,7 +10,7 @@ public class ScoreModule : MonoBehaviour {
     public float currentHighAlt = 0f;
     public PlayerControl pcon;
     public Canvas canvas;
-    public GameObject highAltBorder;
+    public GameObject highAltBorder, gameEndDialog;
 
     void Awake() {
         currentHighAlt = 0f;
@@ -36,8 +36,8 @@ public class ScoreModule : MonoBehaviour {
         if(score > highScore) highScore = score;
 
         Save();
-        DisplayUI(Mathf.FloorToInt(LevelGenerator.playerGroundy), Mathf.FloorToInt(currentHighAlt), MissileControl.missilesUsed, score);
-        SceneManager.LoadScene("GameScene");
+        gameEndDialog.SetActive(true);
+        gameEndDialog.GetComponent<GameEndDialog>().Show(Mathf.FloorToInt(LevelGenerator.playerGroundy), Mathf.FloorToInt(currentHighAlt), MissileControl.missilesUsed, score);
     }
 
     public int CalculateScore() {
@@ -59,9 +59,5 @@ public class ScoreModule : MonoBehaviour {
 
         Debug.Log("HighScore: " + highScore);
         Debug.Log("HighReached: " + highReached + "m");
-    }
-
-    private void DisplayUI(int reached, int altitude, int shots, int score) {
-        //todo
     }
 }
