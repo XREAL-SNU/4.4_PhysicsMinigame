@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0c0b801db10474e9ada730e1710046, type: 3}
+  m_Name: OmegaMissile
+  m_EditorClassIdentifier: 
+  force: 1200
+  radius: 10
+  upwardsModifier: 0.1
+  explosionFx: {fileID: 3118978194580274893, guid: b257ba8fb0e29d4428ed8057e9ec4fb8, type: 3}
+  smokeFx: {fileID: 3118978194580274893, guid: 49a130c9e484f7e4fab20fe3d656bdb0, type: 3}
+  missileObject: {fileID: 1374063425668206, guid: f46a76bd9a426344487e167b17768833, type: 3}
+  missileDuration: 1.2
+  explosionSound: {fileID: 8300000, guid: a04932eb6eaa2564d91467acd66a07b3, type: 3}
+  shootSound: {fileID: 8300000, guid: 5c4b45aa8d31d314e80c5c6d560276b4, type: 3}
+  explosionVolume: 1
+  sprite: {fileID: 21300000, guid: 07dd63e0461e4b74da4904e92bb0510a, type: 3}
